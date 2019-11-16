@@ -2,17 +2,17 @@ version: '3'
 services:
 
   #PHP Service
-  app:
+  cookbook_app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app
+    container_name: cookbook_app
     restart: unless-stopped
     tty: true
     environment:
-      SERVICE_NAME: app
+      SERVICE_NAME: cookbook_app
       SERVICE_TAGS: dev
-      MYSQL_HOST: db
+      MYSQL_HOST: cookbook_db
       MYSQL_DATABASE: database
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: root
@@ -24,9 +24,9 @@ services:
       - app-network
 
   #Nginx Service
-  webserver:
+  cookbook_webserver:
     image: nginx:alpine
-    container_name: webserver
+    container_name: cookbook_webserver
     restart: unless-stopped
     tty: true
     ports:
@@ -38,9 +38,9 @@ services:
       - app-network
 
   #MySQL Service
-  db:
+  cookbook_db:
     image: mysql:5.7.22
-    container_name: db
+    container_name: cookbook_db
     restart: unless-stopped
     tty: true
     ports:

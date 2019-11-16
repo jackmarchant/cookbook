@@ -1,6 +1,6 @@
 .PHONY: test
 
-COMPOSE_PROJECT_NAME=app
+COMPOSE_PROJECT_NAME=cookbook_app
 
 COMPOSE_FILE?=docker-compose.yml
 
@@ -30,3 +30,6 @@ logs:
 
 test:
 	docker exec $(COMPOSE_PROJECT_NAME) vendor/bin/phpunit
+
+ps:
+	$(COMPOSE) ps
