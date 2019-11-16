@@ -1,0 +1,24 @@
+<phpunit 
+  backupGlobals="false"
+  backupStaticAttributes="false"
+  colors="true"
+  convertErrorsToExceptions="true"
+  convertNoticesToExceptions="true"
+  convertWarningsToExceptions="true"
+  processIsolation="false"
+  stopOnFailure="false"
+>
+    <logging>
+        <log type="coverage-html" target="cover" />
+    </logging>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">app/</directory>
+        </whitelist>
+    </filter>
+    <testsuites>
+      <testsuite name="Tests">
+        <directory>test</directory>
+      </testsuite>
+    </testsuites>
+</phpunit>
