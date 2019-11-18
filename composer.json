@@ -17,6 +17,10 @@
         "test": "vendor/bin/phpunit"
     },
     "require": {
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "twig/twig": "^2.0",
+        "slim/http": "^0.8.0",
+        "http-interop/http-factory-guzzle": "^1.0",
+        "slim/slim": "^4.0"
     }
 }

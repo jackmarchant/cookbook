@@ -2,10 +2,12 @@
 
 namespace App;
 
+use Psr\Container\ContainerInterface;
+
 /**
  * Dependency Injection Container
  */
-class Container
+class Container implements ContainerInterface
 {
     /** @var array $container */
     private $container = [];
@@ -25,5 +27,10 @@ class Container
     public function get($key)
     {
         return $this->container[$key];
+    }
+
+    public function has($key)
+    {
+        return isset($this->container[$key]);
     }
 }

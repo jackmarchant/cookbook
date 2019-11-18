@@ -2,7 +2,12 @@
 
 use App\Container;
 use App\Database;
+use App\Router;
 use App\App;
+use App\Controllers\RecipesController;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -14,6 +19,15 @@ $container->set('database', function ($container) {
     return Database::connect($container->get('settings')['database']);
 });
 
-$app = new App($container);
+// Instantiate App
+AppFactory::setContainer($container);
+$app = AppFactory::create();
 
-echo $app->run();
+// Add error middleware
+$app->addErrorMiddleware(true, true, true);
+
+// Add routes
+$app->get('/', RecipesController::class . ':index');
+$app->get('/recipe/{id}', RecipesController::class . ':recipe');
+
+$app->run();
