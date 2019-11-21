@@ -9,5 +9,6 @@ abstract class AbstractController
     public function __construct(Container $container)
     {
         $this->view = $container->get('view');
+        $this->entityManager = $container->get('entityManager');
     }
 }
