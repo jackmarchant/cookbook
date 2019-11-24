@@ -10,6 +10,7 @@ use App\Controllers\RecipesController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
+use App\Domain\Service\RecipeService;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -29,6 +30,10 @@ $container->set('entityManager', function ($container) {
     return CookbookManager::create($container);
 });
 
+$container->set(RecipeService::class, function ($container) {
+    return new RecipeService($container->get('entityManager'));
+});
+
 // Instantiate App
 AppFactory::setContainer($container);
 $app = AppFactory::create();
@@ -39,5 +44,7 @@ $app->addErrorMiddleware(true, true, true);
 // Add routes
 $app->get('/', RecipesController::class . ':index');
 $app->get('/recipe/{id}', RecipesController::class . ':recipe');
+$app->get('/create-recipe', RecipesController::class . ':create');
+$app->post('/create-recipe', RecipesController::class . ':create');
 
 $app->run();

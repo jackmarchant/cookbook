@@ -7,24 +7,39 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 use App\Controllers\AbstractController;
 use App\Domain\Model\Recipe;
+use App\Domain\Service\RecipeService;
+use App\Container;
 
 class RecipesController extends AbstractController
 {
+    /** @var RecipeService */
+    protected $service;
+
+    public function __construct(Container $container)
+    {
+        parent::__construct($container);
+        $this->service = $container->get(RecipeService::class);
+    }
+
     public function index(Request $request, Response $response, $args)
     {
-        // TODO: Pull this out to an internal service
-        $recipes = $this->entityManager->getRepository(Recipe::class)->findAll();
-
-        $response->getBody()->write($this->view->render('index.twig', ['recipes' => $recipes]));
-        return $response;
+        $recipes = $this->service->findAll();
+        return $this->renderResponse($response, 'index.twig', ['recipes' => $recipes]);
     }
 
     public function recipe(Request $request, Response $response, $params)
     {
-        // TODO: Pull this out to an internal service
-        $recipe = $this->entityManager->getRepository(Recipe::class)->find($params['id']);
+        $recipe = $this->service->find($params['id']);
+        return $this->renderResponse($response, 'recipe.twig', ['recipe' => $recipe]);
+    }
 
-        $response->getBody()->write($this->view->render('recipe.twig', ['recipe' => $recipe]));
-        return $response;
+    public function create(Request $request, Response $response)
+    {
+        if ($request->isGet()) {
+            return $this->renderResponse($response, 'create-recipe.twig');
+        }
+
+        $recipe = $this->service->create($request->getParsedBody());
+        return $this->renderResponse($response, 'recipe.twig', ['recipe' => $recipe]);
     }
 }

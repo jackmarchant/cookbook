@@ -5,11 +5,12 @@ namespace App;
 use Doctrine\ORM\Decorator\EntityManagerDecorator;
 use Doctrine\ORM\Tools\Setup as DoctrineSetup;
 use Doctrine\ORM\EntityManager as DoctrineEntityManager;
+use App\Interfaces\EntityManagerInterface;
 
 /**
  * Skeleton to provide named entity manager for the Cookbook database
  */
-class CookbookManager extends EntityManagerDecorator
+class CookbookManager extends EntityManagerDecorator implements EntityManagerInterface
 {
     public static function create($container)
     {
