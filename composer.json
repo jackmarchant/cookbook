@@ -18,6 +18,7 @@
         "test": "vendor/bin/phpunit"
     },
     "require": {
+        "ext-mysqli": "*",
         "ext-pdo": "*",
         "twig/twig": "^2.0",
         "slim/http": "^0.8.0",
