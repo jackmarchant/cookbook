@@ -2,6 +2,7 @@
 
 namespace App;
 
+
 class Database
 {
     public static function connect(array $settings)

@@ -33,3 +33,6 @@ test:
 
 ps:
 	$(COMPOSE) ps
+
+update-db:
+	docker exec $(COMPOSE_PROJECT_NAME) php vendor/bin/doctrine orm:schema-tool:update --force

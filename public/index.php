@@ -43,8 +43,11 @@ $app->addErrorMiddleware(true, true, true);
 
 // Add routes
 $app->get('/', RecipesController::class . ':index');
+$app->get('/recipe/create', RecipesController::class . ':create');
+$app->post('/recipe/create', RecipesController::class . ':create');
 $app->get('/recipe/{id}', RecipesController::class . ':recipe');
-$app->get('/create-recipe', RecipesController::class . ':create');
-$app->post('/create-recipe', RecipesController::class . ':create');
+$app->get('/recipe/edit/{id}', RecipesController::class . ':edit');
+$app->post('/recipe/edit/{id}', RecipesController::class . ':edit');
+$app->post('/recipe/delete/{id}', RecipesController::class . ':delete');
 
 $app->run();

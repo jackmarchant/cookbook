@@ -66,3 +66,28 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before, table.dataT
 table.dataTable tbody th, table.dataTable tbody td {
     padding: 18px 10px;
 }
+
+ul, ol {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+ul li {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 5px;
+}
+
+ol li {
+    list-style-type: decimal;
+    padding-left: 20px;
+    margin-bottom: 5px;
+}
+
+h3 {
+    font-size: .75rem;
+    margin-bottom: .75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0px;
+}

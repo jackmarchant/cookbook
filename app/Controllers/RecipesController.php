@@ -27,7 +27,7 @@ class RecipesController extends AbstractController
         return $this->renderResponse($response, 'index.twig', ['recipes' => $recipes]);
     }
 
-    public function recipe(Request $request, Response $response, $params)
+    public function recipe(Request $request, Response $response, array $params)
     {
         $recipe = $this->service->find($params['id']);
         return $this->renderResponse($response, 'recipe.twig', ['recipe' => $recipe]);
@@ -36,10 +36,31 @@ class RecipesController extends AbstractController
     public function create(Request $request, Response $response)
     {
         if ($request->isGet()) {
-            return $this->renderResponse($response, 'create-recipe.twig');
+            return $this->renderResponse($response, 'forms/recipe.twig');
         }
 
         $recipe = $this->service->create($request->getParsedBody());
-        return $this->renderResponse($response, 'recipe.twig', ['recipe' => $recipe]);
+        return $response->withRedirect(sprintf('/recipe/%s', $recipe->getId()));
+    }
+
+    public function edit(Request $request, Response $response, array $params)
+    {
+        $recipe = $this->service->find($params['id']);
+
+        if ($request->isGet()) {
+            return $this->renderResponse($response, 'forms/recipe.twig', ['recipe' => $recipe]);
+        }
+
+        $recipe = $this->service->update($recipe, $request->getParsedBody());
+        return $response->withRedirect(sprintf('/recipe/%s', $recipe->getId()));
+    }
+
+    public function delete(Request $request, Response $response, array $params)
+    {
+        $recipe = $this->service->find($params['id']);
+
+        $this->service->delete($recipe);
+
+        return $response->withRedirect('/');
     }
 }

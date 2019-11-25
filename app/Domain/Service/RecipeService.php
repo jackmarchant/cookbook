@@ -37,6 +37,27 @@ class RecipeService
     }
 
     /**
+     * Update a recipe
+     *
+     * @param Recipe $recipe
+     * @param array $params
+     * @return Recipe
+     */
+    public function update(Recipe $recipe, array $params)
+    {
+        $recipe
+            ->setName($params['name'])
+            ->setTotalTime($params['totalTime'])
+            ->setServings($params['servings'])
+            ->setIngredients($params['ingredients'])
+            ->setMethod($params['method'])
+            ->setModified(new DateTime());
+
+        $this->entityManager->flush();
+        return $recipe;
+    }
+
+    /**
      * Create a new Recipe
      *
      * @param array $params
@@ -49,11 +70,25 @@ class RecipeService
             ->setName($params['name'])
             ->setTotalTime($params['totalTime'])
             ->setServings($params['servings'])
+            ->setIngredients($params['ingredients'])
+            ->setMethod($params['method'])
             ->setCreated(new DateTime())
             ->setModified(new DateTime());
 
         $this->entityManager->persist($recipe);
         $this->entityManager->flush();
         return $recipe;
+    }
+
+    /**
+     * Delete a Recipe
+     *
+     * @param Recipe $recipe
+     * @return void
+     */
+    public function delete(Recipe $recipe)
+    {
+        $this->entityManager->remove($recipe);
+        $this->entityManager->flush();
     }
 }

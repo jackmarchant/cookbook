@@ -11,17 +11,21 @@
     <div id="recipients" class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
         <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="/">Back</a>
         <section class="container mx-auto">
-            <h1 class="text-xl text-gray-900 leading-tight">{{ recipe.name }}</h1>
-            <p>{{ recipe.totalTime }} - {{ recipe.servings }}</p>
-            <h2 class="text text-gray-900 leading-tight">Ingredients</h2>
-            <ul class="list-disc list-inside">
-                
-            </ul>
+            <h1 class="text-xl text-gray-900 leading-tight text-4xl">{{ recipe.name }}</h1>
+            <p>{{ recipe.totalTime }} - {{ recipe.servings }} servings</p>
+            <div class="mb-6">
+                <h2 class="text leading-tight text-xl mb-3 mt-3 uppercase text-gray-900">Ingredients</h2>
+                {% apply markdown_to_html %}
+                    {{ recipe.ingredients }}
+                {% endapply %}
+            </div>
 
-            <h2 class="text text-gray-900 leading-tight">Method</h2>
-            <ol class="list-disc list-inside">
-                
-            </ol>
+            <div class="mb-6">
+                <h2 class="text leading-tight text-xl mb-3 mt-3 uppercase text-gray-900">Method</h2>
+                {% apply markdown_to_html %}
+                    {{ recipe.method }}
+                {% endapply %}
+            </div>
         </section>
     </div>
 </body>

@@ -44,6 +44,20 @@ class Recipe
     private $servings;
 
     /**
+     * @var string
+     * 
+     * @ORM\Column(name="ingredients", type="text", nullable=false)
+     */
+    private $ingredients;
+
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="method", type="text", nullable=false)
+     */
+    private $method;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime", nullable=true)
@@ -138,6 +152,54 @@ class Recipe
     public function getServings()
     {
         return $this->servings;
+    }
+
+    /**
+     * Set ingredients
+     *
+     * @param string $ingredients
+     *
+     * @return Recipe
+     */
+    public function setIngredients($ingredients)
+    {
+        $this->ingredients = $ingredients;
+
+        return $this;
+    }
+
+    /**
+     * Get ingredients
+     *
+     * @return string
+     */
+    public function getIngredients()
+    {
+        return $this->ingredients;
+    }
+
+    /**
+     * Set method
+     *
+     * @param string $method
+     *
+     * @return Recipe
+     */
+    public function setMethod($method)
+    {
+        $this->method = $method;
+
+        return $this;
+    }
+
+    /**
+     * Get method
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->method;
     }
 
     /**

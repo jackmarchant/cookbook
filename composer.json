@@ -23,6 +23,8 @@
         "slim/http": "^0.8.0",
         "http-interop/http-factory-guzzle": "^1.0",
         "slim/slim": "^4.0",
-        "symfony/orm-pack": "^1.0"
+        "symfony/orm-pack": "^1.0",
+        "twig/markdown-extra": "^3.0",
+        "erusev/parsedown": "^1.7"
     }
 }
